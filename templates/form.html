@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .summary-button {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .summary-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Page</h1>
+
+    <section id="add-item-section">
+        <h2>Add Item</h2>
+        <form method="post" action="{{ url_for('form') }}">
+            <label for="name">Item Name:</label>
+            <input type="text" name="name" required>
+            <br>
+            <label for="price">Item Price (Rs.):</label>
+            <input type="number" name="price" step="0.01" required>
+            <br>
+            <button type="submit">Add Item</button>
+        </form>
+    </section>
+
+    <section id="summary-section">
+        <h2>Summary</h2>
+        <table>
+            <tr>
+                <th>Item Name</th>
+                <th>Item Price (Rs.)</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p>Total Amount: Rs. {{ total_amount }}</p>
+        <a href="{{ url_for('summary') }}" class="summary-button">View Summary</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Web App</p>
+    </footer>
+</body>
+</html>
